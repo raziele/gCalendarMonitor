@@ -18,11 +18,14 @@ Note that:
  - Keywords are case insensitive   
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## Demo
 ![how this looks like on calendar](https://github.com/raziele/gCalendarMonitor/raw/master/images/demo.gif)
 
 =======
 >>>>>>> fd14370... removed
+=======
+>>>>>>> fd1437018b1d40244bd4a79ba38be14cc97699b9
 ## How (Does it look like)
 
 ## How (To Install)
