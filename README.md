@@ -16,11 +16,6 @@ Note that:
  - All keywords are required to be in the description                                                                                                                                
  - Keywords are case insensitive   
 
-<<<<<<< HEAD
-=======
-## How (Does it look like)
-
->>>>>>> fd14370... removed
 ## How (To Install)
 Create a project with the script:
 1. go to script.google.com (make sure you're connected with the account its calendar you'd like to monitor)
