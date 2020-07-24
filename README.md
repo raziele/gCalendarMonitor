@@ -7,15 +7,7 @@ Sometimes we want event openers to add useful information to their event so we c
 This script continuously monitors the owner`s calendar.
 This script monitors events updates in the owner's calendar (new events, updated events etc.)
 Events that don't have the keywords mentioned in their description are declined and a cute-but-telling-off email message of your choice.
-<<<<<<< HEAD
-||||||| parent of 91ed194... fixing markers
-<<<<<<< HEAD
-=======
 
->>>>>>> 90cd49ccbe6fd180cc35a9c65ada153b6d5da9e0
-=======
-
->>>>>>> 91ed194... fixing markers
 The following events are not checked:
   - A cancelled event 
   - An all-day event
