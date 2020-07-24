@@ -17,9 +17,6 @@ Note that:
  - All keywords are required to be in the description                                                                                                                                
  - Keywords are case insensitive   
 
-## Demo
-![how this looks like on calendar](https://github.com/raziele/gCalendarMonitor/raw/master/images/demo.gif)
-
 ## How (Does it look like)
 
 ## How (To Install)
