@@ -7,6 +7,10 @@ Sometimes we want event openers to add useful information to their event so we c
 This script continuously monitors the owner`s calendar.
 This script monitors events updates in the owner's calendar (new events, updated events etc.)
 Events that don't have the keywords mentioned in their description are declined and a cute-but-telling-off email message of your choice.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 90cd49ccbe6fd180cc35a9c65ada153b6d5da9e0
 The following events are not checked:
   - A cancelled event 
   - An all-day event
@@ -16,6 +20,20 @@ Note that:
  - All keywords are required to be in the description                                                                                                                                
  - Keywords are case insensitive   
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+## Demo
+![how this looks like on calendar](https://github.com/raziele/gCalendarMonitor/raw/master/images/demo.gif)
+
+=======
+>>>>>>> fd14370... removed
+=======
+>>>>>>> fd1437018b1d40244bd4a79ba38be14cc97699b9
+## How (Does it look like)
+
+>>>>>>> 90cd49ccbe6fd180cc35a9c65ada153b6d5da9e0
 ## How (To Install)
 Create a project with the script:
 1. go to script.google.com (make sure you're connected with the account its calendar you'd like to monitor)
