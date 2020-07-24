@@ -7,13 +7,19 @@ Sometimes we want event openers to add useful information to their event so we c
 This script continuously monitors the owner`s calendar.
 This script monitors events updates in the owner's calendar (new events, updated events etc.)
 Events that don't have the keywords mentioned in their description are declined and a cute-but-telling-off email message of your choice.
+
 The following events are not checked:
   - A cancelled event 
-  -   - An all-day event
-  -     - The event came from a different domain
+  - An all-day event
+  - The event came from a different domain
+
 Note that:                                                                                                        
- - All keywords are required to be in the description                                                                                                                                                                                     
- -  - Keywords are case insensitive                                                                                                                                                                                                          
+ - All keywords are required to be in the description                                                                                                                                
+ - Keywords are case insensitive   
+
+## Demo
+![how this looks like on calendar](images/demo.gif)
+
 ## How (Does it look like)
 
 ## How (To Install)
