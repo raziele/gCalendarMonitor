@@ -17,9 +17,12 @@ Note that:
  - All keywords are required to be in the description                                                                                                                                
  - Keywords are case insensitive   
 
+<<<<<<< HEAD
 ## Demo
-![how this looks like on calendar](images/demo.gif)
+![how this looks like on calendar](https://github.com/raziele/gCalendarMonitor/raw/master/images/demo.gif)
 
+=======
+>>>>>>> fd14370... removed
 ## How (Does it look like)
 
 ## How (To Install)
