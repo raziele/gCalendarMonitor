@@ -1,27 +1,33 @@
 /******************************************************************************
-* Configuration
+ * - This script monitors updates in the owner's calendar, declines any events
+ *   without specific keywords in its description and sends an alert email to the
+ *   event creator.
+ * - Event is not checked if it was cancelled, if it is an all-day event or if
+ *   the creator is from a different domain from the one defined
+ * - Event is checked every time it was modified
+ * - All keywords are required to be in the description
+ * - Keywords are case insensitive
+ ******************************************************************************/
 
-* (Mandatory) Emails not from this domain will be skipped
-CAL_MON_INTERNAL_DOMAIN = 'my_organizaion.com'  
+CAL_MON_INTERNAL_DOMAIN = 'my_domain.com'
+CAL_MON_CALENDAR_ID = 'username@my_domain.com'
+CAL_MON_DECLINE_EVENT = true
+CAL_MON_KEYWORDS = ['agenda', 'goal']
+CAL_MON_MIN_ATTENDEES_SIZE = 3
 
-* Your calendar ID, can be found under: 
-* Google Celendar Settings --> Settings for my calendars --> <Calendar name> --> Integrate Calendar
-CAL_MON_CALENDAR_ID = 'my_user@my_organization.com' 
+// Each item in the array represents a different line 
+CAL_MON_ALERT_MESSAGE = ['Hi!', 
+                         'It seems like your event is missing a goal or an agenda in the event description.',
+                         'I would like to have those so I know how can I contribute to the meeting',
+                         'Could you please add those under the event description?',
+                         'Until you do, I assume I am not needed so I am going focus on other matters', 
+                         'Thanks!'
+                        ]
 
-* Decline the event or only send an alerting email
-CAL_MON_DECLINE_EVENT = true 
+// Internal Config, no need to change this
+CAL_MON_MAX_RETURNED_EVENTS = 100
+CAL_MON_DAYS_TO_LOOK_AHEAD = 14
 
-* Keywords to look for in event description \ notes (case insensitive)
-CAL_MON_KEYWORDS = ['agenda', 'goal']  
-
-* (Optional) Maximum number of events to process every time the function executes
-CAL_MON_MAX_RETURNED_EVENTS = 100 
-
-* (Optional) How many days should the function look ahead (in the future)
-CAL_MON_DAYS_TO_LOOK_AHEAD = 14 
-******************************************************************************/
-
-//==================================
 function onCalendarChange(){
   var properties = PropertiesService.getUserProperties();
   var options = {
@@ -39,7 +45,6 @@ function onCalendarChange(){
     options.timeMin = getRelativeDate(CAL_MON_DAYS_TO_LOOK_AHEAD, 0).toISOString();
   }
   
-
   var events;
   var pageToken;
   
@@ -73,14 +78,22 @@ function onCalendarChange(){
         } else if (isExternalCreator(event.creator.email)) {
                    console.log('Event name %s was created by external email ', event.summary);
                    continue;
+        } else if (event.attendees.length <= CAL_MON_MIN_ATTENDEES_SIZE) {
+                  console.log('Event name %s does not have enough attendees', event.summary);
+                  continue;
         } else if (event.start.date){
                    console.log('Event name %s is an all-day event', event.summary);
                    continue;
         } else if (isMissingKeyWords(event.description)){
                    sendAlertEmail(event.organizer.email, event.summary);
                    if (CAL_MON_DECLINE_EVENT) {
-                     var eve = CalendarApp.getEventById(event.id);
-                     eve.setMyStatus(CalendarApp.GuestStatus.NO);
+                     try {
+                       var eve = CalendarApp.getEventById(event.id);
+                       eve.setMyStatus(CalendarApp.GuestStatus.NO);
+                     }
+                     catch (e) {
+                       throw new Error(e.message);
+                     }
                    }
                    continue;    
         } else {
@@ -98,7 +111,6 @@ function onCalendarChange(){
     
 }
 
-//==================================
 function isExternalCreator(email){
   var domainRegexMatch = new RegExp('@(.+)');
   var e = domainRegexMatch.exec(email)[1];
@@ -110,7 +122,6 @@ function isExternalCreator(email){
     }
 }
 
-//==================================
 function isMissingKeyWords(description){
   if(!description){
     return true
@@ -132,18 +143,8 @@ function isMissingKeyWords(description){
 
 
 //==================================
-function sendAlertEmail(to, eventSummary) {
-  var subject = ['Missing goal or agenda: ', eventSummary].join('');
-  var alertMessage = ['Hi! It seems like your event:', 
-                      eventSummary, 
-                      'is missing a goal or an agenda in the event description.',
-                      'Its important to me to have those so I know how can I contribute to the meeting',
-                      'Could you please add those under the event description?',
-                      'Until you do, I assume I am not needed so I am going focus my time on other matters', 
-                      'Thanks!',
-                      ].join('\n');
-                   
-  MailApp.sendEmail(to, eventSummary, alertMessage);
+function sendAlertEmail(to, eventSummary) {                  
+  MailApp.sendEmail(to, eventSummary, CAL_MON_ALERT_MESSAGE.join('\n'));
 }
                       
                    
