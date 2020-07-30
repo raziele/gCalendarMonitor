@@ -97,7 +97,7 @@ function onCalendarChange(){
                    }
                    continue;    
         } else {
-          consolde.log('Event %s looks good!', event.summary)
+          console.log('Event %s looks good!', event.summary)
         }
       }
     } else {
