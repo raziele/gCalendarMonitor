@@ -71,10 +71,13 @@ function onCalendarChange(){
     if (events.items && events.items.length > 0) {
       for (var i = 0; i < events.items.length; i++) {
         var event = events.items[i];
-      
-        if (event.status === 'cancelled') {
-          console.log('Event name %s was cancelled.', event.summary);
+        
+        if (event.attendees == undefined){
+          console.log('Error: Event name %s is missing attendees property', event.summary);
           continue;
+        } else if (event.status === 'cancelled') {
+                   console.log('Event name %s was cancelled.', event.summary);
+                   continue;
         } else if (isExternalCreator(event.creator.email)) {
                    console.log('Event name %s was created by external email ', event.summary);
                    continue;
